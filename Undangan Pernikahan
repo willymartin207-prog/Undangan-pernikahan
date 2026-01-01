@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Undangan Pernikahan</title>
+
+<style>
+:root{
+  --primary:#c9a24d;
+  --bg:#faf8f5;
+  --text:#2b2b2b;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  scroll-behavior:smooth;
+}
+
+section{padding:60px 20px;max-width:900px;margin:auto;}
+h1,h2,h3{
+  font-family:Georgia, serif;
+  font-weight:400;
+  text-align:center;
+}
+h1{font-size:36px;}
+h2{font-size:28px;margin-bottom:20px;}
+p{text-align:center;margin-top:10px;}
+
+button{
+  padding:14px 32px;
+  background:var(--primary);
+  border:none;
+  color:white;
+  border-radius:30px;
+  font-size:16px;
+}
+
+.cover{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),
+  url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e") center/cover;
+  color:white;
+}
+.cover h1{font-size:42px;}
+.cover p{margin:15px 0;}
+
+.hidden{display:none;}
+
+.fade{
+  opacity:0;
+  transform:translateY(20px);
+  transition:1s;
+}
+.fade.show{
+  opacity:1;
+  transform:none;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin-top:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;
+}
+.grid img{
+  width:100%;
+  border-radius:12px;
+}
+
+iframe{
+  width:100%;
+  height:300px;
+  border:0;
+  border-radius:12px;
+}
+
+footer{
+  padding:40px 20px;
+  text-align:center;
+  font-size:14px;
+  color:#777;
+}
+
+.audio-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--primary);
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- COVER -->
+<div class="cover" id="cover">
+  <div>
+    <p id="guestName">Kepada Yth. Tamu Undangan</p>
+    <h1>Andi & Rina</h1>
+    <p>Sabtu, 20 Juli 2026</p>
+    <button onclick="openInvitation()">Buka Undangan</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_68c63f94d9.mp3">
+</audio>
+<div class="audio-btn hidden" id="audioBtn" onclick="toggleMusic()">♫</div>
+
+<!-- CONTENT -->
+<div id="content" class="hidden">
+
+<section class="fade">
+  <h2>Assalamu’alaikum</h2>
+  <p>Dengan memohon rahmat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di pernikahan kami.</p>
+</section>
+
+<section class="fade">
+  <h2>Akad Nikah</h2>
+  <div class="card">
+    <p>Sabtu, 20 Juli 2026</p>
+    <p>Pukul 09.00 WIB</p>
+    <p>Masjid Raya Al-Falah</p>
+  </div>
+</section>
+
+<section class="fade">
+  <h2>Resepsi</h2>
+  <div class="card">
+    <p>Sabtu, 20 Juli 2026</p>
+    <p>Pukul 11.00 – 14.00 WIB</p>
+    <p>Gedung Serbaguna Harmoni</p>
+  </div>
+</section>
+
+<section class="fade">
+  <h2>Countdown</h2>
+  <h3 id="countdown">Loading...</h3>
+</section>
+
+<section class="fade">
+  <h2>Lokasi Acara</h2>
+  <iframe src="https://maps.google.com/maps?q=jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<section class="fade">
+  <h2>Galeri</h2>
+  <div class="grid">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9">
+    <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f">
+    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c">
+  </div>
+</section>
+
+<section class="fade">
+  <h2>RSVP</h2>
+  <p>Mohon konfirmasi kehadiran Anda</p>
+  <p><a href="#" target="_blank">Klik di sini untuk RSVP</a></p>
+</section>
+
+<section class="fade">
+  <h2>Penutup</h2>
+  <p>Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+</section>
+
+<footer>
+  © 2026 Andi & Rina
+</footer>
+
+</div>
+
+<script>
+/* OPEN */
+function openInvitation(){
+  document.getElementById("cover").style.display="none";
+  document.getElementById("content").classList.remove("hidden");
+  document.getElementById("audioBtn").classList.remove("hidden");
+  document.getElementById("music").play();
+}
+
+/* MUSIC */
+function toggleMusic(){
+  let m=document.getElementById("music");
+  m.paused ? m.play() : m.pause();
+}
+
+/* FADE */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add("show");
+  });
+},{threshold:.2});
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+
+/* COUNTDOWN */
+const eventDate=new Date("2026-07-20T09:00:00").getTime();
+setInterval(()=>{
+  let now=new Date().getTime();
+  let d=eventDate-now;
+  if(d<0){document.getElementById("countdown").innerHTML="Hari Bahagia!";return;}
+  let days=Math.floor(d/(1000*60*60*24));
+  let hours=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  let mins=Math.floor((d%(1000*60*60))/(1000*60));
+  document.getElementById("countdown").innerHTML=
+    `${days} Hari ${hours} Jam ${mins} Menit`;
+},1000);
+
+/* GUEST NAME */
+const url=new URLSearchParams(window.location.search);
+const guest=url.get("to");
+if(guest){
+  document.getElementById("guestName").innerText="Kepada Yth. "+guest;
+}
+</script>
+
+</body>
+</html>
